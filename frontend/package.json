@@ -1,0 +1,22 @@
+{
+  "name": "dealer-lookup-frontend",
+  "version": "1.0.0",
+  "description": "Dealer Lookup Frontend - React + Amplify Gen2",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "@aws-amplify/ui-react": "^3.0.7",
+    "aws-amplify": "^5.0.10",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-scripts": "5.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0"
+  }
+}
