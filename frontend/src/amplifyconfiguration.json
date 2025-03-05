@@ -1,0 +1,27 @@
+{
+  "aws_project_region": "us-east-1",
+  "aws_appsync_graphqlEndpoint": "",
+  "aws_appsync_region": "",
+  "aws_appsync_authenticationType": "API_KEY",
+  "aws_cognito_identity_pool_id": "",
+  "aws_cognito_region": "",
+  "aws_user_pools_id": "",
+  "aws_user_pools_web_client_id": "",
+  "oauth": {},
+  "aws_cognito_login_mechanisms": [],
+  "aws_cognito_signup_attributes": [],
+  "aws_cognito_mfa_configuration": "OFF",
+  "aws_cognito_mfa_types": [],
+  "aws_cognito_password_protection_settings": {
+    "passwordPolicyMinLength": 8,
+    "passwordPolicyCharacters": []
+  },
+  "aws_cognito_verification_mechanisms": [],
+  "aws_cloud_logic_custom": [
+    {
+      "name": "DealerApi",
+      "endpoint": "https://your-api-gateway-url.amazonaws.com",
+      "region": "us-east-1"
+    }
+  ]
+}
