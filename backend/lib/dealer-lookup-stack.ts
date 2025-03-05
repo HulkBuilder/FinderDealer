@@ -11,17 +11,20 @@ export class DealerLookupStack extends cdk.Stack {
     constructor(scope: Construct, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
 
+        // S3 Bucket for dealers.csv
         const dealerBucket = new s3.Bucket(this, 'DealerBucket', {
             bucketName: 'amplify-dealers-search',
             removalPolicy: cdk.RemovalPolicy.RETAIN
         });
 
+        // DynamoDB Table
         const dealerTable = new dynamodb.Table(this, 'DealerTable', {
             tableName: 'Dealers',
             partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
             removalPolicy: cdk.RemovalPolicy.RETAIN
         });
 
+        // IAM Role for Lambda
         const lambdaRole = new iam.Role(this, 'DealerLambdaRole', {
             assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),
             managedPolicies: [
@@ -31,6 +34,7 @@ export class DealerLookupStack extends cdk.Stack {
             ]
         });
 
+        // Lambda Function
         const dealerLambda = new lambda.Function(this, 'DealerLambda', {
             functionName: 'DealerDataProcessor',
             runtime: lambda.Runtime.PYTHON_3_9,
@@ -39,12 +43,14 @@ export class DealerLookupStack extends cdk.Stack {
             role: lambdaRole
         });
 
+        // S3 Event Notification for Lambda Trigger
         dealerBucket.addEventNotification(
             s3.EventType.OBJECT_CREATED,
             new s3n.LambdaDestination(dealerLambda),
             { prefix: 'dealers.csv' }
         );
 
+        // API Gateway for Manual Trigger
         const api = new apigateway.RestApi(this, 'DealerApi', {
             restApiName: 'Dealer Lookup API'
         });
